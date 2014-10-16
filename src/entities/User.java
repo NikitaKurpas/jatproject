@@ -36,4 +36,71 @@ public class User implements Serializable {
     public User() {
 	super();
     }
+
+    public User(String username, String hashedPassword, String fullName) {
+	super();
+	this.username = username;
+	this.hashedPassword = hashedPassword;
+	this.fullName = fullName;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+	return id;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+	return username;
+    }
+
+    /**
+     * @param username
+     *            the username to set
+     */
+    public void setUsername(String username) {
+	this.username = username;
+    }
+
+    /**
+     * @return the hashedPassword
+     */
+    public String getHashedPassword() {
+	return hashedPassword;
+    }
+
+    /**
+     * @param hashedPassword
+     *            the hashedPassword to set
+     */
+    public void setHashedPassword(String hashedPassword) {
+	this.hashedPassword = hashedPassword;
+    }
+
+    /**
+     * @return the fullName
+     */
+    public String getFullName() {
+	return fullName;
+    }
+
+    /**
+     * @param fullName
+     *            the fullName to set
+     */
+    public void setFullName(String fullName) {
+	this.fullName = fullName;
+    }
 }
