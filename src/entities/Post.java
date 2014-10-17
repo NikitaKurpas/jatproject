@@ -26,9 +26,9 @@ public class Post implements Serializable {
     private Integer id;
 
     @ManyToOne
-    private User author;
+    private UserEntity author;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post")
     private List<entities.Comment> comments;
 
     @Column(nullable = false, length = 500)
@@ -41,5 +41,86 @@ public class Post implements Serializable {
 
     public Post() {
 	super();
+    }
+
+    public Post(String title, String text, UserEntity author) {
+	this.title = title;
+	this.text = text;
+	this.author = author;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+	return id;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    /**
+     * @return the author
+     */
+    public UserEntity getAuthor() {
+	return author;
+    }
+
+    /**
+     * @param author
+     *            the author to set
+     */
+    public void setAuthor(UserEntity author) {
+	this.author = author;
+    }
+
+    /**
+     * @return the comments
+     */
+    public List<entities.Comment> getComments() {
+	return comments;
+    }
+
+    /**
+     * @param comments
+     *            the comments to set
+     */
+    public void setComments(List<entities.Comment> comments) {
+	this.comments = comments;
+    }
+
+    /**
+     * @return the text
+     */
+    public String getText() {
+	return text;
+    }
+
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text) {
+	this.text = text;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+	return title;
+    }
+
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+	this.title = title;
     }
 }

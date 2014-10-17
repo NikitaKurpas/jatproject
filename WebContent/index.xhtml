@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:body>
 
@@ -19,15 +20,22 @@
 		</ui:define>
 
 		<ui:define name="content">
-			<h3>
-				<h:outputText value="#{msg.welcomeHeading}" />
-			</h3>
-			<p>
-				<h:outputText value="#{msg.welcomeMessage}" />
-			</p>
-			<h:form>
-				<h:commandLink action="test">Go to test page</h:commandLink>
-			</h:form>
+			<c:forEach items="#{postBean.getAllPosts()}" var="post">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h:link value="#{post.title}" outcome="editPost">
+							<f:param name="postId" value="post.id"></f:param>
+						</h:link>
+					</div>
+					<div class="panel-body">
+						<h:outputText value="#{post.text}"></h:outputText>
+					</div>
+					<div class="panel-footer">
+						By
+						<h:outputText value="#{post.author.username}"></h:outputText>
+					</div>
+				</div>
+			</c:forEach>
 		</ui:define>
 
 	</ui:composition>

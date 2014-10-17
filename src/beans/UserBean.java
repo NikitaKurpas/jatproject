@@ -1,20 +1,21 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
-import entities.User;
+import sessionbeans.UserSessionBeanLocal;
+import entities.UserEntity;
 
 @ManagedBean(name = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
+
+    @EJB
+    private UserSessionBeanLocal userSB;
 
     private String username;
 
@@ -22,8 +23,9 @@ public class UserBean implements Serializable {
 
     private String fullName;
 
-    @PersistenceContext
-    EntityManager em;
+    private UserEntity loggedUser;
+
+    private boolean logged = false;
 
     /**
      * 
@@ -31,38 +33,33 @@ public class UserBean implements Serializable {
     private static final long serialVersionUID = 5022669426687458041L;
 
     public String login() {
-	Query query = em
-		.createQuery("SELECT u FROM User u WHERE u.username = :username");
-	query.setParameter("username", this.username);
+	UserEntity user = userSB.logIn(username, password);
 
-	List<Object> result = query.getResultList();
+	System.out.print(user == null ? "User is null" : user.getUsername());
 
-	if (result.isEmpty()) {
-	    return "/login.xhtml?fail=true&message=\"Username not found\"";
-	}
+	if (user == null)
+	    return "login.xhtml?message=\"Failed to log in\"";
 
-	User user = (User) result.get(0);
-	if (bcrypt.BCrypt.checkpw(this.password, user.getHashedPassword())) {
-	    this.password = null;
-	    return "/index.xhtml";
-	}
-
-	return "/login.xhtml?fail=true&message=\"Password is incorrect\"";
+	loggedUser = user;
+	logged = true;
+	return "index.xhtml";
     }
 
     public String register() {
-	String hashedPassword = bcrypt.BCrypt.hashpw(this.password,
-		bcrypt.BCrypt.gensalt());
-	User user = new User(username, hashedPassword, fullName);
-	em.persist(user);
-	this.password = null;
-	return "/index.xhtml";
+	loggedUser = userSB.createUser(username, password, fullName);
+	System.out.print(loggedUser == null ? "User is null" : loggedUser
+		.getUsername());
+	if (loggedUser == null)
+	    return "register.xhtml?message=\"Failed to register\"";
+	logged = true;
+	return "index.xhtml";
     }
 
     public String logout() {
 	FacesContext.getCurrentInstance().getExternalContext()
 		.invalidateSession();
-	return "/index.xhtml";
+	logged = false;
+	return "index.xhtml";
     }
 
     /**
@@ -108,6 +105,20 @@ public class UserBean implements Serializable {
      */
     public void setFullName(String fullName) {
 	this.fullName = fullName;
+    }
+
+    /**
+     * @return the isLogged
+     */
+    public boolean isLogged() {
+	return logged;
+    }
+
+    /**
+     * @return the loggedUser
+     */
+    public UserEntity getLoggedUser() {
+	return loggedUser;
     }
 
 }

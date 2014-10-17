@@ -17,41 +17,32 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package beans;
+package sessionbeans;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.ejb.Local;
+
+import entities.UserEntity;
 
 /**
  * 
  * @version $Id$
  */
-@ManagedBean
-@SessionScoped
-public class TestBean implements Serializable {
+@Local
+public interface UserSessionBeanLocal {
 
-    /**
-     * Generated UID
-     */
-    private static final long serialVersionUID = -5399245311162268519L;
+    public UserEntity createUser(UserEntity user);
 
-    private String testString;
+    public UserEntity createUser(String username, String rawPassword, String fullName);
 
-    /**
-     * @return the testString
-     */
-    public String getTestString() {
-	return testString;
-    }
+    public UserEntity getUserById(String userId);
 
-    /**
-     * @param testString
-     *            the testString to set
-     */
-    public void setTestString(String testString) {
-	this.testString = testString;
-    }
+    public UserEntity getUserByUsername(String username);
 
+    public List<UserEntity> getAllUsers();
+
+    public List<UserEntity> findUsers(String username);
+
+    public UserEntity logIn(String username, String rawPassword);
 }

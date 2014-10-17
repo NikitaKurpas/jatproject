@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
- * Entity implementation class for Entity: User
+ * Entity implementation class for Entity: UserEntity
  *
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = "User.all", query = "SELECT u FROM User u") })
-public class User implements Serializable {
+@NamedQueries({ @NamedQuery(name = "UserEntity.all", query = "SELECT u FROM UserEntity u") })
+public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,13 +33,16 @@ public class User implements Serializable {
     @Column(nullable = true)
     private String fullName;
 
+    @OneToMany(mappedBy = "author")
+    private List<Post> posts;
+
     private static final long serialVersionUID = 1L;
 
-    public User() {
+    public UserEntity() {
 	super();
     }
 
-    public User(String username, String hashedPassword, String fullName) {
+    public UserEntity(String username, String hashedPassword, String fullName) {
 	super();
 	this.username = username;
 	this.hashedPassword = hashedPassword;
@@ -102,5 +107,20 @@ public class User implements Serializable {
      */
     public void setFullName(String fullName) {
 	this.fullName = fullName;
+    }
+
+    /**
+     * @return the posts
+     */
+    public List<Post> getPosts() {
+	return posts;
+    }
+
+    /**
+     * @param posts
+     *            the posts to set
+     */
+    public void setPosts(List<Post> posts) {
+	this.posts = posts;
     }
 }
