@@ -22,7 +22,7 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li><h:link value="Home" outcome="index"></h:link></li>
-						<li><h:link value="Users" outcome="users"></h:link></li>
+						<li><h:link rendered="#{userBean.logged}" value="Users" outcome="users"></h:link></li>
 						<li><h:link rendered="#{userBean.logged}" value="Create Post"
 								outcome="createPost"></h:link></li>
 					</ul>

@@ -24,6 +24,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 import sessionbeans.PostSessionBeanLocal;
 import entities.Post;
@@ -33,6 +34,7 @@ import entities.Post;
  * @version $Id$
  */
 @ManagedBean(name = "postBean")
+@SessionScoped
 public class PostBean {
 
     private String title, text;
@@ -56,12 +58,12 @@ public class PostBean {
     public String createPost() {
 	Post post = new Post(title, text, userBean.getLoggedUser());
 	postSB.createPost(post);
-	return "index.xhtml";
+	return "index.xhtml?faces-redirect=true";
     }
 
     public String persistPost() {
 	postSB.createPost(currentPost);
-	return "index.xhtml";
+	return "index.xhtml?faces-redirect=true";
     }
 
     /**

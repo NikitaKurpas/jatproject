@@ -31,10 +31,10 @@ public class Post implements Serializable {
     @OneToMany(mappedBy = "post")
     private List<entities.Comment> comments;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 3000)
     private String text;
 
-    @Column(unique = true, length = 60)
+    @Column(unique = true, length = 150)
     private String title;
 
     private static final long serialVersionUID = 1L;

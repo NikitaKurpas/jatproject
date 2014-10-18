@@ -1,5 +1,6 @@
 /META-INF/
+/bcrypt/
 /beans/
 /entities/
-/sessionbeans/
 /resources/
+/sessionbeans/

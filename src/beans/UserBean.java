@@ -1,11 +1,14 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 import sessionbeans.UserSessionBeanLocal;
 import entities.UserEntity;
@@ -27,9 +30,6 @@ public class UserBean implements Serializable {
 
     private boolean logged = false;
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 5022669426687458041L;
 
     public String login() {
@@ -38,11 +38,11 @@ public class UserBean implements Serializable {
 	System.out.print(user == null ? "User is null" : user.getUsername());
 
 	if (user == null)
-	    return "login.xhtml?message=\"Failed to log in\"";
+	    return "login.xhtml?faces-redirect=true&message=\"Failed to log in\"";
 
 	loggedUser = user;
 	logged = true;
-	return "index.xhtml";
+	return "index.xhtml?faces-redirect=true";
     }
 
     public String register() {
@@ -50,16 +50,32 @@ public class UserBean implements Serializable {
 	System.out.print(loggedUser == null ? "User is null" : loggedUser
 		.getUsername());
 	if (loggedUser == null)
-	    return "register.xhtml?message=\"Failed to register\"";
+	    return "register.xhtml?faces-redirect=true&message=\"Failed to register\"";
 	logged = true;
-	return "index.xhtml";
+	return "index.xhtml?faces-redirect=true";
     }
 
     public String logout() {
 	FacesContext.getCurrentInstance().getExternalContext()
 		.invalidateSession();
 	logged = false;
-	return "index.xhtml";
+	return "index.xhtml?faces-redirect=true";
+    }
+
+    public void loginCheck(ComponentSystemEvent event) {
+	FacesContext fc = FacesContext.getCurrentInstance();
+	System.out.println("logged = " + logged);
+
+	if (!logged) {
+	    ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc
+		    .getApplication().getNavigationHandler();
+
+	    nav.performNavigation("access-denied");
+	}
+    }
+    
+    public List<UserEntity> getAllUsers() {
+	return userSB.getAllUsers();
     }
 
     /**

@@ -23,9 +23,10 @@
 			<c:forEach items="#{postBean.getAllPosts()}" var="post">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h:link value="#{post.title}" outcome="editPost">
+						<h:outputText value="#{post.title}"></h:outputText>
+						<!--<h:link value="#{post.title}" outcome="editPost">
 							<f:param name="postId" value="post.id"></f:param>
-						</h:link>
+						</h:link>-->
 					</div>
 					<div class="panel-body">
 						<h:outputText value="#{post.text}"></h:outputText>
