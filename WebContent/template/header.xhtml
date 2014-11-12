@@ -25,6 +25,8 @@
 						<li><h:link rendered="#{userBean.logged}" value="Users" outcome="users"></h:link></li>
 						<li><h:link rendered="#{userBean.logged}" value="Create Post"
 								outcome="createPost"></h:link></li>
+						<li><h:link value="Entity7"
+								outcome="entities"></h:link></li>
 					</ul>
 
 					<h:link style="margin-top: 8px; float: right;"
@@ -34,7 +36,7 @@
 					<h:link style="margin-top: 8px; margin-right:5px; float: right;"
 						styleClass="btn btn-primary" rendered="#{!userBean.logged}"
 						value="Log In" outcome="login"></h:link>
-
+						
 
 					<h:form style="margin-top: 8px; float: right;">
 						<h:commandLink styleClass="btn btn-danger"

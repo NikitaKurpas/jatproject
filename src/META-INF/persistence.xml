@@ -7,6 +7,7 @@
 		<class>entities.Employee</class>
 		<class>entities.FullTimeEmployee</class>
 		<class>entities.PartTimeEmployee</class>
+		<class>entities.Entity7</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
                  value="jdbc:derby://localhost:1527/sun-appserv-samples;create=true"/>

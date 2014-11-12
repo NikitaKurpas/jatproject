@@ -10,7 +10,12 @@ import javax.persistence.Id;
 @Entity
 public abstract class Employee implements Serializable {
 
+    public Employee() {
+	super();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer employeeId;
+    
 }

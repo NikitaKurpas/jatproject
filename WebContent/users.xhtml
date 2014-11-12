@@ -16,11 +16,25 @@
 		</ui:define>
 
 		<ui:define name="content">
-			<ul class="list-group">
+		
+			<h:dataTable value="#{userBean.getAllUsers()}" var="u">
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Username</f:facet>
+    				<!-- row record -->
+    				#{u.username}
+    			</h:column>
+    			<h:column>
+    				<f:facet name="header">Full name</f:facet>
+    				#{u.fullName}
+    			</h:column>
+    		</h:dataTable>
+		
+			<!-- <ul class="list-group">
 				<c:forEach items="#{userBean.getAllUsers()}" var="user">
 					<li class="list-group-item"><h:outputText value="#{user.username}"></h:outputText> - <h:outputText value="#{user.fullName}"></h:outputText></li>
 				</c:forEach>
-			</ul>
+			</ul> -->
 
 		</ui:define>
 

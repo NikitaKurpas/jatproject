@@ -24,5 +24,10 @@
 			<value>#{userBean}</value>
 		</managed-property>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>testBean</managed-bean-name>
+		<managed-bean-class>beans.TestBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 </faces-config>
