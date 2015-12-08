@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+<h:body>
+	<ui:composition template="/template/layout.xhtml">
+	
+		<!--<ui:define name="init">
+			<f:event listener="#{userBean.loginCheck}" type="preRenderView" />
+		</ui:define>-->
+	
+		<ui:define name="head">
+			<title>Register</title>
+		</ui:define>
+
+		<ui:define name="content">
+			<h:form styleClass="form-group">
+				<div class="form-group">
+					<label for="title">*Title</label>
+					<h:inputText id="title" styleClass="form-control"
+						value="#{postBean.title}" />
+
+				</div>
+				<div class="form-group">
+					<label for="text">*Text</label>
+					<h:inputTextarea id="text" styleClass="form-control"
+						value="#{postBean.text}" />
+				</div>
+				<h:commandButton value="Create post" action="#{postBean.createPost()}"
+					styleClass="btn btn-primary"></h:commandButton>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

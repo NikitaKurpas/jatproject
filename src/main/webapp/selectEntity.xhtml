@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<ui:composition template="/template/layout.xhtml">
+
+		<ui:define name="head">
+			<title>List and display entities</title>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<h:form>
+				
+				<label>Entities: </label>
+				<h:selectOneMenu value="#{testBean.selectedEntity}">
+					<f:converter converterId="converters.Entity7Converter" />
+					<f:selectItems value="#{testBean.getEntites()}" var="e"
+						itemValue="#{e}" itemLabel="#{e.entityName} ##{e.entityIdentifier}" />
+				</h:selectOneMenu>
+				
+				<h:commandButton value="Select" action="selectEntity" />
+				
+				<p>Selected entity:</p>
+				<span>Name: #{testBean.selectedEntity.entityName}</span><br></br>
+				<span>entityId: #{testBean.selectedEntity.entityIdentifier}</span>
+				
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

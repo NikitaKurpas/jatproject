@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<ui:composition template="/template/layout.xhtml">
+
+		<ui:define name="head">
+			<title>Entities</title>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<h:form>
+ 				<p>
+	 				<label>Text in format: Entity [entity name}:{entity number}</label>
+	 				<br/>
+					<h:inputText id="entityAdder" value="#{testBean.entityToAdd}" size="20"
+							required="true" label="Add entity">
+							<f:converter converterId="converters.Entity7Converter" />
+					</h:inputText>
+					<h:message for="entityAdder" style="color:red" />
+				</p>
+				<p>
+					<h:commandButton value="Add" action="addEntity" />
+				</p>
+			</h:form>
+			
+			<li><h:link value="Select Entity7"
+								outcome="selectEntity"></h:link></li>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

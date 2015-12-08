@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="JAT_project_blog">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+        <class>info.sigmaproject.jat.entities.Comment</class>
+        <class>info.sigmaproject.jat.entities.Employee</class>
+        <class>info.sigmaproject.jat.entities.Entity7</class>
+        <class>info.sigmaproject.jat.entities.FullTimeEmployee</class>
+        <class>info.sigmaproject.jat.entities.PartTimeEmployee</class>
+        <class>info.sigmaproject.jat.entities.Post</class>
+        <class>info.sigmaproject.jat.entities.UserEntity</class>
+
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:h2:~/jat_blog"/>
+            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
+            <property name="hibernate.connection.username" value=""/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>
